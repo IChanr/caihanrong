@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Android基础," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="服务是一种应用程序组件，表示应用程序希望在不与用户交互的情况下执行长时间运行的操作，或者为其他应用程序提供的功能。每个服务类必须 在其包中有对应的 声明AndroidManifest.xml。服务可以通过Context.startService()和 Context.bindService()来进行启动。更详细了解地址:https://developer.android.google.cn/re">
+<meta name="keywords" content="Android基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Service使用指南">
+<meta property="og:url" content="http://www.hamro.top/2018/06/08/Service使用指南/index.html">
+<meta property="og:site_name" content="Cai Han Rong">
+<meta property="og:description" content="服务是一种应用程序组件，表示应用程序希望在不与用户交互的情况下执行长时间运行的操作，或者为其他应用程序提供的功能。每个服务类必须 在其包中有对应的 声明AndroidManifest.xml。服务可以通过Context.startService()和 Context.bindService()来进行启动。更详细了解地址:https://developer.android.google.cn/re">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://raw.githubusercontent.com/IChanr/IMG/master/handler%E5%A4%84%E7%90%86%E8%BF%87%E7%A8%8B.png">
+<meta property="og:image" content="https://github.com/IChanr/IMG/blob/master/intentservice.png">
+<meta property="og:updated_time" content="2018-06-08T14:40:48.222Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Service使用指南">
+<meta name="twitter:description" content="服务是一种应用程序组件，表示应用程序希望在不与用户交互的情况下执行长时间运行的操作，或者为其他应用程序提供的功能。每个服务类必须 在其包中有对应的 声明AndroidManifest.xml。服务可以通过Context.startService()和 Context.bindService()来进行启动。更详细了解地址:https://developer.android.google.cn/re">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/IChanr/IMG/master/handler%E5%A4%84%E7%90%86%E8%BF%87%E7%A8%8B.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.hamro.top/2018/06/08/Service使用指南/"/>
+
+
+
+
+
+  <title>Service使用指南 | Cai Han Rong</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Cai Han Rong</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.hamro.top/2018/06/08/Service使用指南/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cai Han Rong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cai Han Rong">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Service使用指南</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-08T21:49:56+08:00">
+                2018-06-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>服务是一种应用程序组件，表示应用程序希望在不与用户交互的情况下执行长时间运行的操作，或者为其他应用程序提供的功能。<br>每个服务类必须<service> 在其包中有对应的 声明AndroidManifest.xml。<br>服务可以通过Context.startService()和 Context.bindService()来进行启动。<br>更详细了解地址:<a href="https://developer.android.google.cn/reference/android/app/Service" target="_blank" rel="noopener">https://developer.android.google.cn/reference/android/app/Service</a><br><a id="more"></a></service></p>
+</blockquote>
+<h2 id="1-服务是什么"><a href="#1-服务是什么" class="headerlink" title="1.    服务是什么?"></a>1.    服务是什么?</h2><blockquote>
+<p>​    服务是一种应用程序组件，当应用程序希望在不与用户交互的情况下执行长时间运行的操作，或者为其他应用程序提供的功能。每个服务类必须在其包的AndroidManifest.xml中具有相应的<service>声明。 </service></p>
+<p>​    特别需要注意的是,<strong>服务也是运行在主线程当中的</strong>,当你需要运行耗时任务的时候需要另外开辟子线程,否则会造成界面的卡死.</p>
+<p>​    需要知道的是,服务本身并不是一个线程或进程,它是依赖于创建服务时所在的应用程序进程,当应用程序停止这个服务也会终止运行.</p>
+<p>​    </p>
+</blockquote>
+<h2 id="2-异步处理"><a href="#2-异步处理" class="headerlink" title="2.    异步处理:"></a>2.    异步处理:</h2><h3 id="2-1-异步消息的处理机制"><a href="#2-1-异步消息的处理机制" class="headerlink" title="2.1    异步消息的处理机制:"></a>2.1    异步消息的处理机制:</h3><blockquote>
+<p>​    Android中的异步消息处理机制主要由下面四部分组成.</p>
+<p>​    每当创建一个Handler实例的时候,它将自动绑定到创建该实例的线程上.所以当Handler在主线程中创建,里面的handlerMessage()方法执行的操作也是在主线程当中进行的.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Message</td>
+<td style="text-align:center">可以携带少量信息,用于在不同的线程之间交互数据.可以使用what字段或arg1,arg2,obj字段携带信息.</td>
+</tr>
+<tr>
+<td style="text-align:center">Handler</td>
+<td style="text-align:center">用于发送和处理Message,发送使用SendMessage(),接收则使用handleMessage().</td>
+</tr>
+<tr>
+<td style="text-align:center">MessageQueue</td>
+<td style="text-align:center">消息队列,主要存放所有通过Handler发送的消息,.每个线程中只会有一个MessageQueue对象</td>
+</tr>
+<tr>
+<td style="text-align:center">Looper</td>
+<td style="text-align:center">是MessageQueue的管家,调用Looper的loop()方法以后就会进入无限循环,每当发现消息队列中存在消息的时候,就会把消息取出,并传递到Handler的handlerMessage()方法中.和上面一样每个线程中只有一个Looper对象.</td>
+</tr>
+</tbody>
+</table>
+<p><img src="https://raw.githubusercontent.com/IChanr/IMG/master/handler%E5%A4%84%E7%90%86%E8%BF%87%E7%A8%8B.png" alt=""></p>
+<blockquote>
+<p><strong>一条Message经过这样的一个流程以后,也就由子线程进入了主线程,也就可以对UI进行相对应的修改了.整个异步消息处理的核心也就是如此</strong> </p>
+</blockquote>
+<h3 id="2-2-使用AsyncTask"><a href="#2-2-使用AsyncTask" class="headerlink" title="2.2    使用AsyncTask:"></a>2.2    使用AsyncTask:</h3><blockquote>
+<p>AsyncTask也是基于Handler封装而来的.由于AsyncTask是一个抽象类,因此想要使用AsyncTask就必须创建一个继承自AsyncTask的类,并指定泛型和重写以下四个方法.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"></th>
+<th style="text-align:center">用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">onPreExecute()gai</td>
+<td style="text-align:center">该方法会在后台任务开始执行之前调用,用于进行一些界面上的初始化操作</td>
+</tr>
+<tr>
+<td style="text-align:left">doInBackground(Parans …)</td>
+<td style="text-align:center">这个方法中的所有代码都会在子线程中进行操作,任务一旦完成就可以通过return语句来将任务的执行结果返回,如果AsyncTask的第三个泛型参数指定为Void,就可以不返回任务执行结果.(如果想要更新任务进度的话,可以调用publishProgress(Progress …)方法来完成)</td>
+</tr>
+<tr>
+<td style="text-align:left">onProgressUpdate(Progress …)</td>
+<td style="text-align:center">当后台任务调用了publishProgress(Progress …),当前方法就会被调用,该方法中的参数就是在后台任务中传递过来的.在这个方法中可以对UI进行操作.利用传进来的参数就可以对界面进行更新.</td>
+</tr>
+<tr>
+<td style="text-align:left">onPostExecute(Result)</td>
+<td style="text-align:center">当后台任务完成并通过return返回的时候,当前方法就被调用,返回的数据会作为参数传递到当前方法中,可以利用返回的数据来进行一些UI操作,比如提醒任务完成等…</td>
+</tr>
+</tbody>
+</table>
+<p>​    <strong>实践</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = <span class="string">"MainActivity"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        </span><br><span class="line">        mySynnc mySyn = <span class="keyword">new</span> mySynnc(); <span class="comment">//异步任务的初始化</span></span><br><span class="line">        mySyn.execute();  <span class="comment">//当实现异步任务类的第一个参数指定不为空的时候,需要把要提交的参数放在.execute()中</span></span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//通过代码实践可以直观的看出整个异步任务的执行流程</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">mySynnc</span> <span class="keyword">extends</span> <span class="title">AsyncTask</span>&lt;<span class="title">Void</span>, <span class="title">Integer</span>, <span class="title">Boolean</span>&gt; </span>&#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPreExecute</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">super</span>.onPreExecute();</span><br><span class="line">            Log.d(TAG, <span class="string">"onPreExecute: 初始化"</span>);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">protected</span> Boolean <span class="title">doInBackground</span><span class="params">(Void... voids)</span> </span>&#123;</span><br><span class="line">            Log.d(TAG, <span class="string">"doInBackground: 后台"</span>);</span><br><span class="line">            publishProgress(<span class="number">123</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPostExecute</span><span class="params">(Boolean aBoolean)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">super</span>.onPostExecute(aBoolean);</span><br><span class="line">            Log.d(TAG, <span class="string">"onPostExecute: 任务完成,进入收尾阶段"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onProgressUpdate</span><span class="params">(Integer... values)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">super</span>.onProgressUpdate(values);</span><br><span class="line">            Log.d(TAG, <span class="string">"onProgressUpdate: 更新"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-服务的基本用法"><a href="#3-服务的基本用法" class="headerlink" title="3.    服务的基本用法:"></a>3.    服务的基本用法:</h2><blockquote>
+<p>​    通过androidstudio右键新建一个继承自Service的类,并在内部实现相对应的方法,因为服务是四大组件之一所以必须在ManiFest.xml中进行注册,否则无法使用(没反应).</p>
+</blockquote>
+<h3 id="3-1-定义一个服务"><a href="#3-1-定义一个服务" class="headerlink" title="3.1    定义一个服务:"></a>3.1    定义一个服务:</h3><p>​    </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyService</span> <span class="keyword">extends</span> <span class="title">Service</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = <span class="string">"MyService"</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyService</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Log.d(TAG, <span class="string">"MyService: "</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> IBinder <span class="title">onBind</span><span class="params">(Intent intent)</span> </span>&#123;</span><br><span class="line">        Log.d(TAG, <span class="string">"onBind: "</span>);</span><br><span class="line">        <span class="comment">// <span class="doctag">TODO:</span> Return the communication channel to the service.</span></span><br><span class="line">         <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate();</span><br><span class="line">        Log.d(TAG, <span class="string">"onCreate: "</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">onStartCommand</span><span class="params">(Intent intent, <span class="keyword">int</span> flags, <span class="keyword">int</span> startId)</span> </span>&#123;</span><br><span class="line">        Log.d(TAG, <span class="string">"onStartCommand: "</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.onStartCommand(intent, flags, startId);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onDestroy();</span><br><span class="line">        Log.d(TAG, <span class="string">"onDestroy: "</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>​    定义一个服务必须重写 onBind(..) 方法,因为这是一个抽象方法,在实现类中必须被实例.</p>
+<p>​    onCreate()方法在服务被创建时会被调用.</p>
+<p>​    onStartCommond(…) 方法在每次服务启动的时候调用.</p>
+<p>​    onDestroy()     方法 当活动停止这个服务或者活动被销毁的时候,该方法被调用.</p>
+<p>​    服务内部也可以自己调用stopSelf()来停止该服务.</p>
+</blockquote>
+<h3 id="3-2-启动和停止一个服务"><a href="#3-2-启动和停止一个服务" class="headerlink" title="3.2    启动和停止一个服务:"></a>3.2    启动和停止一个服务:</h3><p>​    </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;		</span><br><span class="line">    <span class="comment">//启动服务</span></span><br><span class="line">    Intent intent=<span class="keyword">new</span> Intent(<span class="keyword">this</span>,MyService.class);</span><br><span class="line">    startService(intent);</span><br><span class="line">    <span class="comment">//停止服务</span></span><br><span class="line">    Intent intent2=<span class="keyword">new</span> Intent(<span class="keyword">this</span>,MyService.class);</span><br><span class="line">    stopService(intent);	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>通常这样启用服务十分的不方便,当我们启动服务以后服务就一直在后台处于运行状态,除非执行完毕,否则我们就不知道服务在前在做什么,做到哪里了? 所以我们就需要服务和活动进行通讯.</p>
+</blockquote>
+<h3 id="3-3-服务和活动进行通讯"><a href="#3-3-服务和活动进行通讯" class="headerlink" title="3.3    服务和活动进行通讯:"></a>3.3    服务和活动进行通讯:</h3><blockquote>
+<p>​    在服务中创建一个Binder实例类,并在Binder类中提供相对应的方法给别人调用.  </p>
+<p>​    服务会通过public IBinder onBind(Intent intent) ;方法将Binder对象返回给活动.</p>
+</blockquote>
+<blockquote>
+<p>​    服务:</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyService</span> <span class="keyword">extends</span> <span class="title">Service</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = <span class="string">"MyService"</span>;</span><br><span class="line">    <span class="keyword">private</span> Abinder mAbinder = <span class="keyword">new</span> Abinder();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyService</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Log.d(TAG, <span class="string">"MyService: "</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Nullable</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> IBinder <span class="title">onBind</span><span class="params">(Intent intent)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> mAbinder;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate();</span><br><span class="line">        Log.d(TAG, <span class="string">"onCreate: "</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">onStartCommand</span><span class="params">(Intent intent, <span class="keyword">int</span> flags, <span class="keyword">int</span> startId)</span> </span>&#123;</span><br><span class="line">        Log.d(TAG, <span class="string">"onStartCommand: "</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.onStartCommand(intent, flags, startId);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onDestroy();</span><br><span class="line">        Log.d(TAG, <span class="string">"onDestroy: "</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Abinder</span> <span class="keyword">extends</span> <span class="title">Binder</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            Log.d(TAG, <span class="string">"start: "</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">pause</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            Log.d(TAG, <span class="string">"pause: "</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">resume</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            Log.d(TAG, <span class="string">"resume: "</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">restart</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            Log.d(TAG, <span class="string">"restart: "</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destory</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            Log.d(TAG, <span class="string">"destory: "</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>活动:</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> <span class="keyword">implements</span> <span class="title">View</span>.<span class="title">OnClickListener</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = <span class="string">"调试信息:"</span>;</span><br><span class="line">    <span class="keyword">private</span> Button btn1, btn2, btn3, btn4, btn5;</span><br><span class="line">    <span class="keyword">private</span> MyService.Abinder mAbinder;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        initView();</span><br><span class="line">        Log.d(TAG, <span class="string">"onCreate: 当前活动线程:"</span> + Thread.currentThread().getId());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initView</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		...</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> ServiceConnection mServiceConnection = <span class="keyword">new</span> ServiceConnection() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onServiceConnected</span><span class="params">(ComponentName name, IBinder service)</span> </span>&#123;</span><br><span class="line">            Log.d(TAG, <span class="string">"onServiceConnected: "</span>);</span><br><span class="line">            mAbinder = (MyService.Abinder) service;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onServiceDisconnected</span><span class="params">(ComponentName name)</span> </span>&#123;</span><br><span class="line">            Log.d(TAG, <span class="string">"onServiceDisconnected: "</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">......</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>通过上面完整的代码案列可以知道,在当前活动中通过于服务进行绑定可以获得一个service的内部对象,这个对象可以对service进行一定的控制和获取状态.</p>
+<p>活动中创建了一个ServiceConnection的匿名内部类,</p>
+<p><strong>里面分别重写了    onServiceConnected();    onServiceDisconnected(); 这两个方法,当活动和服务进行绑定或解绑时他们会被调用. </strong>  </p>
+<p>onServiceConnected(); 中 通过向下转型得到service的binder的实例,然后我们就可以通过这个实例对服务进行操作控制.</p>
+<p>其中活动与服务的绑定方法接受三个参数 bindService(bindIntent,connection,BIND_AUTO_CREATE); </p>
+<p>第一个参数是intent对象,指明我们的意图;</p>
+<p>第二个参数是ServiceConnection的实例,它会在绑定成功或失败时回调这个对象中的方法;</p>
+<p>第三个参数是BIND_AUTO_CREATE 这个当前Context提供的一个常量, 表示活动和服务进行绑定以后自动创建服务,所以服务中的onCreate()方法可以执行,但onStartCommand()方法不会执行.</p>
+</blockquote>
+<p>注意点:当前程序中任何一个服务都可以与多个活动进行绑定,而且绑定后获取到的Binder实例也是相同的.</p>
+<h2 id="4-服务的生命周期"><a href="#4-服务的生命周期" class="headerlink" title="4.    服务的生命周期:"></a>4.    服务的生命周期:</h2><blockquote>
+<p><strong>Context中的strartService():  </strong>  </p>
+<p>​    onCreate()-&gt;onStartCommand()-&gt;onDestory()</p>
+<p>​    当这个服务第一次被创建的时候才会调用onCreate();</p>
+<p>​    因为服务只有一个实例,所以不管调用多少次onStartCommand(),只需要调用stopService()就可以将服务销毁</p>
+<p><strong>Context中的bindService(): </strong> </p>
+<p>​    onCreate-&gt;onBinder()-&gt;onDestroy()</p>
+<p>​    通过绑定来获取一个服务的持久化连接,这是会挥动服务中的onBind(),如果之前这个服务没有创建过,会先调用onCreate()方法.   之后就可以通过返回的Binder对象与服务进行通信.     调用unbindService()方法后 服务将会被销毁.</p>
+<p>​    <strong>当服务既调用了startService()又调用了bindService()时,因为Android系统的机制,一个服务只要被启动或绑定就一直处于运行状态,只有两种情况同时不满足这个服务才可以被销毁,所以要同时调用stopService()和unbindService() 这个服务才可以调用onDestroy()</strong></p>
+</blockquote>
+<h2 id="5-更高级的服务"><a href="#5-更高级的服务" class="headerlink" title="5.    更高级的服务:"></a>5.    更高级的服务:</h2><blockquote>
+<p>因为服务几乎都是在后台运行的,并且服务的优先级还是比较低的,当系统出现内存不足的情况,就有可能回收掉正在后台运行的服务.如果不想因为内存不足导致服务被回收,就可以考虑使用前台服务.前台服务和普通的服务的最大区别就在于,他会有一个正在运行的图标在系统的状态了显示,类似通知.</p>
+</blockquote>
+<h3 id="5-1-前台服务"><a href="#5-1-前台服务" class="headerlink" title="5.1    前台服务:"></a>5.1    前台服务:</h3><blockquote>
+<p>​    <strong>只需要在Service的onCreate()方法中添加如下代码</strong>   </p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onCreate();</span><br><span class="line">    Log.d(TAG, <span class="string">"onCreate: "</span>);</span><br><span class="line">    Intent intent = <span class="keyword">new</span> Intent(<span class="keyword">this</span>, MainActivity.class);</span><br><span class="line">    PendingIntent pendingIntent = PendingIntent.getActivity(<span class="keyword">this</span>, <span class="number">0</span>, intent, <span class="number">0</span>);</span><br><span class="line">    Notification notification = <span class="keyword">new</span> NotificationCompat.Builder(<span class="keyword">this</span>).setContentIntent</span><br><span class="line">            (pendingIntent).setContentTitle(<span class="string">"title"</span>).setContentText(<span class="string">"text"</span>).setWhen(System</span><br><span class="line">            .currentTimeMillis()).setSmallIcon(R.mipmap.ic_launcher).setLargeIcon</span><br><span class="line">            (BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher)).build();</span><br><span class="line">    startForeground(<span class="number">1</span>, notification);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>首先先创建一个通知,但和往常显示通过的方式不一样,它是通过调用startForeground()方法来显示;</p>
+<p>这个方法接收两个参数:第一个参数时通知的Id;第二个参数则是构建出的Notification对象,调用这个方法以后就会将这个服务变成一个前台服务.</p>
+</blockquote>
+<h3 id="5-2-IntentService"><a href="#5-2-IntentService" class="headerlink" title="5.2    IntentService:"></a>5.2    IntentService:</h3><blockquote>
+<p>如果在服务中执行一些耗时的操作,可能需要在onStartCommand中开启子线程. 但是因为服务一直处于运行状态,想要让服务停止下来的话需要调用stopSelf() 或者stopService(); 但是经常会忘记开启线程或者调用停止服务的方法,所以Android 专门提供了一个IntentService类,这个类就解决了这两个问题.</p>
+</blockquote>
+<h4 id="用法"><a href="#用法" class="headerlink" title="用法:"></a>用法:</h4><blockquote>
+<p>​    主要是创建一个继承自IntentService的类,并实现相应的方法;</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">方法</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">构造函数();</td>
+<td style="text-align:center">启动IntentService时调用,并赋值一个字符串给父类用于调试式判断工作线程</td>
+</tr>
+<tr>
+<td style="text-align:center">onHandleIntent();</td>
+<td style="text-align:center">这个方法中的代码将会在子线程中执行</td>
+</tr>
+<tr>
+<td style="text-align:center">onDestroy();</td>
+<td style="text-align:center">只要上面的方法执行完毕,就会调用这个方法停止当前服务.</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyIntentService_</span> <span class="keyword">extends</span> <span class="title">IntentService</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = <span class="string">"调试信息:"</span>;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Creates an IntentService.  Invoked by your subclass's constructor.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> name Used to name the worker thread, important only for debugging.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyIntentService_</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(<span class="string">"name"</span>);</span><br><span class="line">        <span class="comment">//name主要时用于调试时 方便知道工作在哪个线程</span></span><br><span class="line">        Log.d(TAG, <span class="string">"MyIntentService_: "</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onHandleIntent</span><span class="params">(@Nullable Intent intent)</span> </span>&#123;</span><br><span class="line">        Log.d(TAG, <span class="string">"onHandleIntent: 服务中的线程:"</span>+Thread.currentThread().getId());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onDestroy();</span><br><span class="line">        Log.d(TAG, <span class="string">"onDestroy: "</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">       setContentView(R.layout.activity_main);</span><br><span class="line">       initView();</span><br><span class="line">       Log.d(TAG, <span class="string">"onCreate: 当前活动线程:"</span> + Thread.currentThread().getId());</span><br><span class="line">       Intent intent=<span class="keyword">new</span> Intent(<span class="keyword">this</span>,MyIntentService_.class);</span><br><span class="line">       startService(intent);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/IChanr/IMG/blob/master/intentservice.png" alt=""></p>
+<blockquote>
+<p>通过调试信息可以看清楚IntentService的运行流程.  这样就十分方便了,后台的代码都在子线程中完成,并且执行完毕之后会自动停止服务.</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android基础/" rel="tag"># Android基础</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/08/Fragment使用指南/" rel="next" title="Fragment使用指南">
+                <i class="fa fa-chevron-left"></i> Fragment使用指南
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/08/Intent-详解/" rel="prev" title="Intent 详解">
+                Intent 详解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Cai Han Rong</p>
+              <p class="site-description motion-element" itemprop="description">记录自己的点点滴滴</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-服务是什么"><span class="nav-number">1.</span> <span class="nav-text">1.    服务是什么?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-异步处理"><span class="nav-number">2.</span> <span class="nav-text">2.    异步处理:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-异步消息的处理机制"><span class="nav-number">2.1.</span> <span class="nav-text">2.1    异步消息的处理机制:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-使用AsyncTask"><span class="nav-number">2.2.</span> <span class="nav-text">2.2    使用AsyncTask:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-服务的基本用法"><span class="nav-number">3.</span> <span class="nav-text">3.    服务的基本用法:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-定义一个服务"><span class="nav-number">3.1.</span> <span class="nav-text">3.1    定义一个服务:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-启动和停止一个服务"><span class="nav-number">3.2.</span> <span class="nav-text">3.2    启动和停止一个服务:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-服务和活动进行通讯"><span class="nav-number">3.3.</span> <span class="nav-text">3.3    服务和活动进行通讯:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-服务的生命周期"><span class="nav-number">4.</span> <span class="nav-text">4.    服务的生命周期:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-更高级的服务"><span class="nav-number">5.</span> <span class="nav-text">5.    更高级的服务:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-前台服务"><span class="nav-number">5.1.</span> <span class="nav-text">5.1    前台服务:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-IntentService"><span class="nav-number">5.2.</span> <span class="nav-text">5.2    IntentService:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#用法"><span class="nav-number">5.2.1.</span> <span class="nav-text">用法:</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cai Han Rong</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
