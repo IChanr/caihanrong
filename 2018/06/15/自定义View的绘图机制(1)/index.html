@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Cai Han Rong">
 <meta property="og:description" content="学习自定义View的理解">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-15T15:21:03.323Z">
+<meta property="og:updated_time" content="2018-06-15T15:31:25.747Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自定义View的绘图机制(1)">
 <meta name="twitter:description" content="学习自定义View的理解">
@@ -404,7 +404,7 @@
 <p><strong>总结:</strong> 通过上面的例子我就发现,在xml中绘图和在layout中设置的一些属性是相似的,androoid可以通过xml解析类来进行解析从而加载到内存中去. 在xml中创建一个&lt;bitmap标签&gt;,当然这个标签还可以设置一些透明度,布局之类的属性.之后我们可以通过这个xml加载这个个性化的视图到应用中去.</p>
 <p>&lt;Shape标签&gt; 可以自定义一个个性化的位图,可以指定他的颜色,padding,圆角的角度,size,边框的大小等风格.实际上这也就是在绘制一张图了</p>
 <p>&lt;layer-list标签&gt; 每插入一个item就新建一个图层最后调用这个xml的时候会获得一个组合了这几个图层的一个视图,这相当于我们在ps中p图的时候为了方便自己修改或者删除视图上的一些内容,我们会每绘制一些内容就保存到一个图层中,最后通过组合的方式将这几个图层都组合起来.</p>
-<p>&lt;selector标签&gt;  Selector的作用在于帮助开发者实现静态绘图中的事件反馈，通过给不同的事件设置不同的图像，从而在程序中根据用户输入，返回不同的效果。,不过只能够进行简单的视觉修改,背景色什么的.我们可以在item中嵌套以上的所有标签来更改(除了Selector)</p>
+<p>&lt;selector标签&gt;  Selector的作用在于帮助开发者实现静态绘图中的事件反馈，通过给不同的事件设置不同的图像，从而在程序中根据用户输入，返回不同的效果。,不过只能够进行简单的视觉修改,背景色什么的.我们可以在item中嵌套以上的所有标签来更改(除了Selector)<br>也就是我们在xml中绘制,然后把绘制的内容应用到控件中去.</p>
 </blockquote>
 <p>##使用Canvas绘制</p>
 <blockquote>
