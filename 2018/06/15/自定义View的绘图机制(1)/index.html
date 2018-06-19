@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Cai Han Rong">
 <meta property="og:description" content="学习自定义View的理解">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-15T15:31:25.747Z">
+<meta property="og:updated_time" content="2018-06-19T15:12:35.144Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自定义View的绘图机制(1)">
 <meta name="twitter:description" content="学习自定义View的理解">
@@ -382,7 +382,7 @@
 <p>XML在Android系统中可不仅仅是Java中的一个布局文件、配置列表。在Android开发者的手上，它甚至可以变成一张画、一幅图。Android的开发者给XML提供了几个强大的技能来帮助我们实现这一功能。 </p>
 </blockquote>
 <hr>
-<p>##绘制Bitmap<br><strong>使用方法:</strong>  通过在在drawable目录下新建一个xml文件,使用bitmap标签 标签指向图片的位置,这就是一个xml就是一个可以供我们使用的图片</p>
+<h2 id="绘制Bitmap"><a href="#绘制Bitmap" class="headerlink" title="绘制Bitmap"></a>绘制Bitmap</h2><p><strong>使用方法:</strong>  通过在在drawable目录下新建一个xml文件,使用bitmap标签 标签指向图片的位置,这就是一个xml就是一个可以供我们使用的图片</p>
 <p><strong>将一张图转换为Bitmao, 如果你愿意还可以设置一些另外的属性</strong><br>`&lt;?xml version=”1.0” encoding=”utf-8”?&gt;</p>
 <p><bitmap android:src="@drawable/chatitem_in_bg" xmlns:android="http://schemas.android.com/apk/res/android"><br>`</bitmap></p>
 <p><strong>布局文件中的引用</strong><br><code>&lt;ImageView
@@ -391,7 +391,7 @@
         android:layout_height=&quot;match_parent&quot; /&gt;</code></p>
 <p><strong>Java中的用法</strong><br><code>Drawable drawable=getResources().getDrawable(R.drawable.getbitmap,null);
         mImageView.setImageDrawable(drawable);</code></p>
-<p>##Shape<br><strong>说明:</strong>通过Shape可以在XML中绘制各种形状</p>
+<h2 id="Shape"><a href="#Shape" class="headerlink" title="Shape"></a>Shape</h2><p><strong>说明:</strong>通过Shape可以在XML中绘制各种形状</p>
 <blockquote>
 <p>Shape 标签中通过android:shape=[“rectangle” | “oval” | “line” | “ring”] &gt; 指定要绘制的是什么形状的图案</p>
 <blockquote>
@@ -406,12 +406,10 @@
 <p>&lt;layer-list标签&gt; 每插入一个item就新建一个图层最后调用这个xml的时候会获得一个组合了这几个图层的一个视图,这相当于我们在ps中p图的时候为了方便自己修改或者删除视图上的一些内容,我们会每绘制一些内容就保存到一个图层中,最后通过组合的方式将这几个图层都组合起来.</p>
 <p>&lt;selector标签&gt;  Selector的作用在于帮助开发者实现静态绘图中的事件反馈，通过给不同的事件设置不同的图像，从而在程序中根据用户输入，返回不同的效果。,不过只能够进行简单的视觉修改,背景色什么的.我们可以在item中嵌套以上的所有标签来更改(除了Selector)<br>也就是我们在xml中绘制,然后把绘制的内容应用到控件中去.</p>
 </blockquote>
-<p>##使用Canvas绘制</p>
-<blockquote>
+<h2 id="使用Canvas绘制"><a href="#使用Canvas绘制" class="headerlink" title="使用Canvas绘制"></a>使用Canvas绘制</h2><blockquote>
 <p>canvas类用于直接操作图层,和我之前猜测一样, 我们在当前的图层中进行绘制和移动以左上角的那个点作为原点来绘制,这个原点是会变的,当我们调用translate(50,50) ,之后的旋转啊移动啊都是以这个移动了x,y各50个坐标点的点为参照.  view中的getWidth();和getHeight();获取的是当前空前被指定的大小,不是整块屏幕的大小.</p>
 </blockquote>
-<p>##Layer图层</p>
-<blockquote>
+<h2 id="Layer图层"><a href="#Layer图层" class="headerlink" title="Layer图层"></a>Layer图层</h2><blockquote>
 <p>类似ps中的图层叠加, 通过在Canvas上绘制一个新的视图来组成不同的视觉效果</p>
 </blockquote>
 <blockquote>
@@ -456,6 +454,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/19/json解析的多种方式/" rel="prev" title="json解析的多种方式">
+                json解析的多种方式 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -532,7 +534,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -587,7 +589,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Android-XML绘图"><span class="nav-number">1.</span> <span class="nav-text">Android XML绘图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Selector"><span class="nav-number">1.1.</span> <span class="nav-text">Selector</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Android-XML绘图"><span class="nav-number">1.</span> <span class="nav-text">Android XML绘图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#绘制Bitmap"><span class="nav-number">1.1.</span> <span class="nav-text">绘制Bitmap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shape"><span class="nav-number">1.2.</span> <span class="nav-text">Shape</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Selector"><span class="nav-number">1.3.</span> <span class="nav-text">Selector</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Canvas绘制"><span class="nav-number">1.4.</span> <span class="nav-text">使用Canvas绘制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Layer图层"><span class="nav-number">1.5.</span> <span class="nav-text">Layer图层</span></a></li></ol></li></ol></div>
             
 
           </div>
