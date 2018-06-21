@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="这篇文章是为了记录使用Android Studio 中遇到的问题的解决办法,以及一些使用心得.">
+<meta name="description" content="注解是从Java1.5开始引入的，当前许多java框架中大量使用注解，如Hibernate、Jersey、Spring。而在Android中，大名鼎鼎的Retrofit，ButterKnife都使用了注解的方式。我们在写Android页面的时候，经常会findViewById来绑定控件，当一个页面非常复杂的时候，这个工作就是个体力活了，于是ButterKnife就应运而生了，类似的还有之前的XUt">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android Studio 记录">
-<meta property="og:url" content="http://www.hamro.top/2018/06/08/Android-Studio-采坑记录/index.html">
+<meta property="og:title" content="android 注解">
+<meta property="og:url" content="http://www.hamro.top/2018/06/21/android-注解/index.html">
 <meta property="og:site_name" content="Cai Han Rong">
-<meta property="og:description" content="这篇文章是为了记录使用Android Studio 中遇到的问题的解决办法,以及一些使用心得.">
+<meta property="og:description" content="注解是从Java1.5开始引入的，当前许多java框架中大量使用注解，如Hibernate、Jersey、Spring。而在Android中，大名鼎鼎的Retrofit，ButterKnife都使用了注解的方式。我们在写Android页面的时候，经常会findViewById来绑定控件，当一个页面非常复杂的时候，这个工作就是个体力活了，于是ButterKnife就应运而生了，类似的还有之前的XUt">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-08T13:59:17.260Z">
+<meta property="og:updated_time" content="2018-06-21T13:30:03.341Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android Studio 记录">
-<meta name="twitter:description" content="这篇文章是为了记录使用Android Studio 中遇到的问题的解决办法,以及一些使用心得.">
+<meta name="twitter:title" content="android 注解">
+<meta name="twitter:description" content="注解是从Java1.5开始引入的，当前许多java框架中大量使用注解，如Hibernate、Jersey、Spring。而在Android中，大名鼎鼎的Retrofit，ButterKnife都使用了注解的方式。我们在写Android页面的时候，经常会findViewById来绑定控件，当一个页面非常复杂的时候，这个工作就是个体力活了，于是ButterKnife就应运而生了，类似的还有之前的XUt">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://www.hamro.top/2018/06/08/Android-Studio-采坑记录/"/>
+  <link rel="canonical" href="http://www.hamro.top/2018/06/21/android-注解/"/>
 
 
 
 
 
-  <title>Android Studio 记录 | Cai Han Rong</title>
+  <title>android 注解 | Cai Han Rong</title>
   
 
 
@@ -286,7 +286,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.hamro.top/2018/06/08/Android-Studio-采坑记录/">
+    <link itemprop="mainEntityOfPage" href="http://www.hamro.top/2018/06/21/android-注解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Cai Han Rong">
@@ -303,7 +303,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Android Studio 记录</h1>
+          <h1 class="post-title" itemprop="name headline">android 注解</h1>
         
 
         <div class="post-meta">
@@ -315,8 +315,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-08T21:39:48+08:00">
-                2018-06-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-21T09:41:51+08:00">
+                2018-06-21
               </time>
             
 
@@ -338,8 +338,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android-Studio/" itemprop="url" rel="index">
-                    <span itemprop="name">Android Studio</span>
+                  <a href="/categories/Android进阶/" itemprop="url" rel="index">
+                    <span itemprop="name">Android进阶</span>
                   </a>
                 </span>
 
@@ -375,88 +375,49 @@
       
 
       
-        <p>这篇文章是为了记录使用Android Studio 中遇到的问题的解决办法,以及一些使用心得.<br><a id="more"></a></p>
-<h1 id="1-快捷键"><a href="#1-快捷键" class="headerlink" title="1. 快捷键:"></a>1. 快捷键:</h1><blockquote>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">快捷键</th>
-<th style="text-align:left">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">Ctrl+Q</td>
-<td style="text-align:left">显示当前调用的方法的参数说明</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl+Shift+F10</td>
-<td style="text-align:left">编译并运行程序</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl+Alt+L</td>
-<td style="text-align:left">格式化代码,并自动对齐</td>
-</tr>
-<tr>
-<td style="text-align:left">Alt+Insert</td>
-<td style="text-align:left">快速插入get/set方法,以及构造方法等.. 经常需要重写的方法</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl+Insert</td>
-<td style="text-align:left">快速新建一个类,活动或者服务</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl+Alt+Left/Right</td>
-<td style="text-align:left">选中往左/右的一个代码单词   就可以不用一个个字母缓慢移动选中了</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl+Alt+O</td>
-<td style="text-align:left">自动清除导入的包但是没有使用过的</td>
-</tr>
-<tr>
-<td style="text-align:left"></td>
-<td style="text-align:left"></td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl+Shift+Space</td>
-<td style="text-align:left">代码智能提示, 会自动补全</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl+Alt+Space</td>
-<td style="text-align:left">代码提示,显示可能的构造方法或者接口</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl+Shift+Up/Down</td>
-<td style="text-align:left">选中的代码向上或者向下移动</td>
-</tr>
-<tr>
-<td style="text-align:left">F2</td>
-<td style="text-align:left">快速跳转到代码报错的那一行</td>
-</tr>
-<tr>
-<td style="text-align:left"></td>
-<td style="text-align:left"></td>
-</tr>
-<tr>
-<td style="text-align:left"></td>
-</tr>
-</tbody>
-</table>
-</blockquote>
-<h1 id="2-故障解决"><a href="#2-故障解决" class="headerlink" title="2. 故障解决:"></a>2. 故障解决:</h1><h4 id="1-运行安卓虚拟机出现-Emulator-Could-not-launch-‘C-Users-H-AppData-Local-Android-Sdk-emulator-qemu-windows-x86-64-qemu-system-i386-exe’-No-such-file-or-directory"><a href="#1-运行安卓虚拟机出现-Emulator-Could-not-launch-‘C-Users-H-AppData-Local-Android-Sdk-emulator-qemu-windows-x86-64-qemu-system-i386-exe’-No-such-file-or-directory" class="headerlink" title="1. 运行安卓虚拟机出现:Emulator: Could not launch ‘C:\Users\H\AppData\Local\Android\Sdk\emulator/qemu/windows-x86_64/qemu-system-i386.exe’: No such file or directory"></a>1. 运行安卓虚拟机出现:Emulator: Could not launch ‘C:\Users\H\AppData\Local\Android\Sdk\emulator/qemu/windows-x86_64/qemu-system-i386.exe’: No such file or directory</h4><blockquote>
-<p>进入SDK Manager/SDK Tools 中将Android Emulator选中,点击apply等待下载完毕以后,确定退出,重新启动模拟器就可以运行了.</p>
-</blockquote>
-<h4 id="2-如何重启android-studio的虚拟机"><a href="#2-如何重启android-studio的虚拟机" class="headerlink" title="2.如何重启android studio的虚拟机"></a>2.如何重启android studio的虚拟机</h4><blockquote>
-<p>长按虚拟机的关机图标会跳出两个选项  (关机/重新启动);</p>
-</blockquote>
-<h2 id="3-怎么看调用一个方法时需要的参数？"><a href="#3-怎么看调用一个方法时需要的参数？" class="headerlink" title="3.怎么看调用一个方法时需要的参数？"></a>3.怎么看调用一个方法时需要的参数？</h2><blockquote>
-<p>方法1：Ctrl+Q </p>
-<p>方法2：Ctrl 然后鼠标移动到相应的方法上面。</p>
-</blockquote>
-<h2 id="2-写代码时，发现某个地方有下划红线怎么快速跳转到这个地方？"><a href="#2-写代码时，发现某个地方有下划红线怎么快速跳转到这个地方？" class="headerlink" title="2.写代码时，发现某个地方有下划红线怎么快速跳转到这个地方？"></a>2.写代码时，发现某个地方有下划红线怎么快速跳转到这个地方？</h2><blockquote>
-<p>按F2，先跳转到类 </p>
-<p>再按F2就可以跳转到相应的方法或者代码语句中。</p>
-</blockquote>
+        <p>注解是从Java1.5开始引入的，当前许多java框架中大量使用注解，如Hibernate、Jersey、Spring。而在Android中，大名鼎鼎的Retrofit，ButterKnife都使用了注解的方式。我们在写Android页面的时候，经常会findViewById来绑定控件，当一个页面非常复杂的时候，这个工作就是个体力活了，于是ButterKnife就应运而生了，类似的还有之前的XUtils等，但是目前使用的最广泛的还是ButterKnife，用法简单，功能完善，持续维护。而这仅仅是在绑定控件领域的注解框架，另外还有EventBus方便我们实现组建间通讯，ParcelableGenerator可实现自动将任意对象转换为Parcelable类型，方便对象传输，等等，各种功能强大的注解都有。（来自binbinqq86的描述）<br><a id="more"></a></p>
+<h1 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h1><h2 id="元注解："><a href="#元注解：" class="headerlink" title="元注解："></a>元注解：</h2><ul>
+<li><p>@Documented —— 指明拥有这个注解的元素可以被javadoc类的工具文档化。</p>
+</li>
+<li><p>@Target——指示该注解可以注解的程序元素。该元注解的取值可以为TYPE,METHOD,CONSTRUCTOR,FIELD等。如果Target元注解没有出现，那么定义的注解可以应用于程序的任何元素。</p>
+</li>
+<li><p>@Inherited——指示允许子类继承父类的注解</p>
+</li>
+<li><p>@Retention——指明了该Annotation的生命周期。RetentionPolicy取值为SOURCE,CLASS,RUNTIME。</p>
+<pre><code>@Retention(RetentionPolicy.SOURCE)   //注解仅存在于源码中，在class字节码文件中不包含
+
+@Retention(RetentionPolicy.CLASS)     // 默认的保留策略，注解会在class字节码文件中存在，但运行时无法获得
+
+@Retention(RetentionPolicy.RUNTIME)  // 注解会在class字节码文件中存在，在运行时可以通过反射获取到
+</code></pre></li>
+</ul>
+<h2 id="内建注解："><a href="#内建注解：" class="headerlink" title="内建注解："></a>内建注解：</h2><h3 id="java提供的内建注解"><a href="#java提供的内建注解" class="headerlink" title="java提供的内建注解"></a>java提供的内建注解</h3><ul>
+<li><p>@Override——当我们想要复写父类中的方法时，我们需要使用该注解去告知编译器我们想要复写这个方法。这样一来当父类中的方法移除或者发生更改时编译器将提示错误信息。</p>
+</li>
+<li><p>@Deprecated——当我们希望编译器知道某一方法不建议使用时，我们应该使用这个注解。Java在javadoc 中推荐使用该注解，我们应该提供为什么该方法不推荐使用的原因以及替代的方法。</p>
+</li>
+<li><p>@SuppressWarnings——这个仅仅是告诉编译器忽略特定的警告信息，例如在泛型中使用原生数据类型。它的保留策略是SOURCE（译者注：在源文件中有效）并且被编译器丢弃。</p>
+</li>
+</ul>
+<h3 id="android提供的内建注解"><a href="#android提供的内建注解" class="headerlink" title="android提供的内建注解"></a>android提供的内建注解</h3><pre><code>因为没有用到，需要的时候可以参考这个文章 [android注解](https://blog.csdn.net/ziwang_/article/details/70513932)
+</code></pre><h2 id="自定义注解的创建和使用"><a href="#自定义注解的创建和使用" class="headerlink" title="自定义注解的创建和使用"></a>自定义注解的创建和使用</h2><pre><code>通过创建一个自定义注解，来简化我们findViewById()和setContentView()的步骤
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.lang.annotation.ElementType;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Retention;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.RetentionPolicy;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Target;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 新建了一个自定义注解类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Target</span>(&#123;ElementType.FIELD,ElementType.TYPE&#125;)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> BindId &#123;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">value</span><span class="params">()</span> <span class="keyword">default</span> View.NO_ID</span>;</span><br><span class="line">    <span class="comment">//设置value的默认值</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">test</span><span class="params">()</span> <span class="keyword">default</span> -1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>注解类的实现类
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BindIdApi</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">bindId</span><span class="params">(Activity obj)</span> </span>&#123;</span><br><span class="line">        Class&lt;?&gt; cls = obj.getClass();</span><br><span class="line">        <span class="comment">//获取传进来的activity的实体类</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//使用反射调用setContentView</span></span><br><span class="line">        <span class="keyword">if</span> (cls.isAnnotationPresent(BindId.class)) &#123;</span><br><span class="line">            <span class="comment">//如果此元素上存在指定类型的注释，则返回true，否则返回false。</span></span><br><span class="line">            BindId bindId = cls.getAnnotation(BindId.class);</span><br><span class="line">            <span class="comment">//获取这个类的bindId注解</span></span><br><span class="line">            <span class="keyword">int</span> id = bindId.value();</span><br><span class="line">            <span class="comment">//得到注解的值</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                Method method = cls.getMethod(<span class="string">"setContentView"</span>, <span class="keyword">int</span>.class);</span><br><span class="line">                <span class="comment">//根据传入的方法名，和方法的参数类型，来获取 某个类内部某个方法的对象</span></span><br><span class="line">                method.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">                <span class="comment">//访问修饰符设置为public</span></span><br><span class="line">                method.invoke(obj, id);</span><br><span class="line">                <span class="comment">//通过传入类的对象和id ，来调用invoke方法。</span></span><br><span class="line">            &#125; <span class="keyword">catch</span> (NoSuchMethodException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InvocationTargetException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//使用反射调用findViewById</span></span><br><span class="line">        Field[] fields = cls.getFields();</span><br><span class="line">        <span class="comment">//获取域的集合</span></span><br><span class="line">        <span class="keyword">for</span> (Field field : fields) &#123;</span><br><span class="line">            <span class="keyword">if</span> (field.isAnnotationPresent(BindId.class)) &#123;</span><br><span class="line">                <span class="comment">//判断此元素是否包含指定类型的注解</span></span><br><span class="line">                BindId bindId2 = field.getAnnotation(BindId.class);</span><br><span class="line">                <span class="keyword">int</span> id2 = bindId2.value();</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    Method method2 = cls.getMethod(<span class="string">"findViewById"</span>, <span class="keyword">int</span>.class);</span><br><span class="line">                    method2.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">                    Object view = method2.invoke(obj, id2);</span><br><span class="line">                    field.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">                    field.set(obj, view);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (NoSuchMethodException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InvocationTargetException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>使用自定义注解
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@BindId</span>(R.layout.activity_annotation)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AnnotationActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line">    <span class="meta">@BindId</span>(R.id.tv_annotation)</span><br><span class="line">    TextView textView;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        BindIdApi.bindId(<span class="keyword">this</span>);</span><br><span class="line">        textView.setBackgroundColor(Color.RED);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="自定义注解的理解："><a href="#自定义注解的理解：" class="headerlink" title="自定义注解的理解："></a>自定义注解的理解：</h1><pre><code>@interface 关键字用来声明一个注解，自动继承 java.lang.annotation.Annotaion 接口。
+里面的每一个方法表示声明了一个可配置的参数，方法名即位参数名。
+如 int value() default 0; 表明给value的默认值为0,方法内部还可以包含其他注解。我们可以使用元注解来注解当前的这个注解。
+返回值类型就是参数的类型且只能为 八种基本数据类型 、 Class 、 String 、 Enum 、Annotations类型以及上述类型所组成的数组。
+通过 default 关键字声明参数的默认值。如果只有一个参数成员最好命名为 value()。
+注解元素必须有确定的值，要么在定义注解元素时默认值指定，要么使用此注解时指定。非基本类型注解元素的值不可为 null
+
+在另一个注解的实现类中，我们通过传入的activity对象来判断这个活动类是否包含有某个注解。如果包含的话，就获取这个注解的实例保存起来。并且把注解的属性的值保存起来。
+接着便可以通过反射来执行类的方法，设置或获取属性的值。
+在java代码中 @BindId(R.layout.activity_annotation) 括号中的int值就可以通过我们在注解中声明的属性名来获取
+什么时候调用实现类，那么自定义注解就什么时候被调用
+</code></pre><p>更加详细的学习地址：<a href="https://linweiwang.github.io/blog/2017/01/02/java-annotation.html" target="_blank" rel="noopener">文章1</a> <a href="https://mp.weixin.qq.com/s/ljJ1uBCinBLhCU6MtOApYA" target="_blank" rel="noopener">文章2</a></p>
 
       
     </div>
@@ -481,8 +442,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/06/08/BroadcastReceive使用指南/" rel="next" title="BroadcastReceive使用指南">
-                <i class="fa fa-chevron-left"></i> BroadcastReceive使用指南
+              <a href="/2018/06/19/markdown常用语法/" rel="next" title="markdown常用语法">
+                <i class="fa fa-chevron-left"></i> markdown常用语法
               </a>
             
           </div>
@@ -490,10 +451,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/06/08/ViewPager使用指南/" rel="prev" title="ViewPager使用指南">
-                ViewPager使用指南 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -625,7 +582,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-快捷键"><span class="nav-number">1.</span> <span class="nav-text">1. 快捷键:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-故障解决"><span class="nav-number">2.</span> <span class="nav-text">2. 故障解决:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-运行安卓虚拟机出现-Emulator-Could-not-launch-‘C-Users-H-AppData-Local-Android-Sdk-emulator-qemu-windows-x86-64-qemu-system-i386-exe’-No-such-file-or-directory"><span class="nav-number">2.0.0.1.</span> <span class="nav-text">1. 运行安卓虚拟机出现:Emulator: Could not launch ‘C:\Users\H\AppData\Local\Android\Sdk\emulator/qemu/windows-x86_64/qemu-system-i386.exe’: No such file or directory</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-如何重启android-studio的虚拟机"><span class="nav-number">2.0.0.2.</span> <span class="nav-text">2.如何重启android studio的虚拟机</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-怎么看调用一个方法时需要的参数？"><span class="nav-number">2.1.</span> <span class="nav-text">3.怎么看调用一个方法时需要的参数？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-写代码时，发现某个地方有下划红线怎么快速跳转到这个地方？"><span class="nav-number">2.2.</span> <span class="nav-text">2.写代码时，发现某个地方有下划红线怎么快速跳转到这个地方？</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#注解"><span class="nav-number">1.</span> <span class="nav-text">注解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#元注解："><span class="nav-number">1.1.</span> <span class="nav-text">元注解：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内建注解："><span class="nav-number">1.2.</span> <span class="nav-text">内建注解：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#java提供的内建注解"><span class="nav-number">1.2.1.</span> <span class="nav-text">java提供的内建注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#android提供的内建注解"><span class="nav-number">1.2.2.</span> <span class="nav-text">android提供的内建注解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义注解的创建和使用"><span class="nav-number">1.3.</span> <span class="nav-text">自定义注解的创建和使用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自定义注解的理解："><span class="nav-number">2.</span> <span class="nav-text">自定义注解的理解：</span></a></li></ol></div>
             
 
           </div>
